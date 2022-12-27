@@ -1,0 +1,134 @@
+\documentclass[a4paper,10pt,ngerman]{scrartcl}
+\usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[a4paper,margin=2.5cm,footskip=0.5cm]{geometry}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+
+% Die nächsten drei Felder bitte anpassen:
+\newcommand{\Aufgabe}{Aufgabe 1: Störung} % Aufgabennummer und Aufgabennamen angeben
+\newcommand{\TeilnahmeId}{66432}                  % Teilnahme-ID angeben
+\newcommand{\TeamId}{00662}                % Team-ID angeben
+\newcommand{\Name}{Linus Schumann}             % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
+
+% Kopf- und Fußzeilen
+\usepackage{scrlayer-scrpage, lastpage}
+\setkomafont{pageheadfoot}{\large\textrm}
+\lohead{\Aufgabe}
+\rohead{Teilnahme-ID: \TeilnahmeId, L. Schumann}
+\cfoot*{\thepage{}/\pageref{LastPage}}
+
+% Position des Titels
+\usepackage{titling}
+\setlength{\droptitle}{-1.0cm}
+
+% Für mathematische Befehle und Symbole
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Für Bilder
+\usepackage{graphicx}
+
+% Für Algorithmen
+\usepackage{algpseudocode}
+
+% Für Quelltext
+\usepackage{listings}
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+  keywordstyle=\color{blue},commentstyle=\color{mygreen},
+  stringstyle=\color{mymauve},rulecolor=\color{mygray},
+  basicstyle=\footnotesize\ttfamily,numberstyle=\tiny\color{mygray},
+  captionpos=b, % sets the caption-position to bottom
+  keepspaces=true, % keeps spaces in text
+  numbers=left, numbersep=5pt, showspaces=false,showstringspaces=true,
+  showtabs=false, stepnumber=2, tabsize=2,
+  breaklines=true,
+  frame=lines,
+  framesep=10pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  escapeinside={\%*}{*)},
+  extendedchars=false
+}
+
+% Anklickbare Links im Dokument
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% Daten für die Titelseite
+\title{\textbf{\Huge\Aufgabe}}
+\author{\LARGE Teilnahme-ID: \LARGE \TeilnahmeId \\\\
+      \LARGE Team-ID: \LARGE \TeamId \\\\
+	    \LARGE Bearbeiter/-in dieser Aufgabe: \\ 
+	    \LARGE \Name\\\\}
+\date{\LARGE\today}
+
+%% ___ Anfang ___ %%
+\begin{document}
+  \maketitle
+  \tableofcontents
+  \vspace{4cm}
+  %% ___ Lösungsidee ___ %%
+  \section{Lösungsidee\label{sec:Loesungsidee}}
+    \subsection{Vorbereiten des Buchtextes\label{sec:Loesungsidee:Vorbereiten}}
+      Um das Problem zu lösen, muss zuerst der Text vom Buch weiter verarbeitet werden. Dazu werden zuerst alle Satz- bzw. Sonderzeichen entfernt. Zu diesen Zeichen gehören:\\
+      \begin{equation}
+        \begin{split}
+          Satz-/Sonderzeichen = \{&''!'', ''?'', ''.'', ''<'', ''>'', ''\_'', ''-'', '';'', '','', ''('', '')'', ''>>'', ''<<'', '':'', \\
+          & ''[Illustration]'', ''"''', ''*'', ''tab''\}
+        \end{split}
+      \end{equation}
+      Nach dem alle Satz-/Sonderzeichen entfernt wurden, müssen alle Folgen an Leerzeichen durch ein einziges Leerzeichen ersetzt werden.\\
+      Dann müssen auch noch Leerzeichen, die am Ende einer Zeile entstanden sind, entfernt werden
+    \subsection{Speichern der Wörter mit Zeile}
+      Nach dem Vorbereiten des Buchtextes, kann dieser in Wörter aufgeteilt werden und es kann jedes Wort mit der passenden Zeile in einer Liste gespeichert werden. Dazu wird einfach der Text Buchstabe für Buchstabe durchgegangen und bei einem ''\textbackslash n'', die Zeile um eins erhöht. In diesem Fall oder bei einem Leerzeichen wird das aktuelle Wort gespeichert.
+    \subsection{Durchsuchen der Wörter}
+      Dann kann die Liste, der Wörter nach dem ersten gesuchten Wort durchsucht werden. Bei einem Fund muss überprüft werden, ob die nachfolgenden Wörter auch mit den gesuchten Wörtern übereinstimmen. Bei einem ''\_'' wird einfach jedes Wort zugelassen. Es könnte auch eine Binäresuche implementiert werden, dann müssten allerdings alle Wörter sortiert werden und die original Reihenfolge würde gestört werden. Daher könnten die nachfolgenden Wörter nicht genau identifiziert werden.\\
+      Außerdem kann man insgesamt sagen, dass eine lineare Suche für die Aufgabe schnell genug ist. Genaueres zur realen Laufzeit lässt sich in \cref{sec:Beispiele} finden.
+  %% ___ Umsetzung ___ %%
+  \section{Umsetzung}
+    \subsection{Allgemeines}
+      Im Folgenden wird die Umsetzung, der in \cref{sec:Loesungsidee} beschriebene Lösungsidee, näher erläutert. Grundsätzlich wurde diese Idee dabei in Python, genauer gesagt in der Datei ''Aufgabe\_1.py'' implementiert. Diese Datei befindet sich im Verzeichnis ''./source/''.\\\\
+      Um das implementierte Programm zu starten, kann das Batch-Script genutzt werden. Dieses befindet sich in ''./executables/''. Eine direkte Ausführung der Python-Datei ist auch möglich, allerdings nur wenn sie man sich im ''./source/'' Verzeichnis befindet.\\\\
+      Unter dem Verzeichnis ''./beispieleingaben/'' befinden sich alle in dieser Dokumentation aufgeführten Beispiele und unter dem Verzeichnis ''./beispielausgaben/'' befinden sich dementsprechend die gesicherten Ausgaben, die auch bei Ausführung des Scripts ausgegeben werden. Damit Letztere besser von den Beispieldaten unterschieden werden können, werden diese mit der Dateiendung ''.out'' gespeichert, sind aber im Klartext und können wie ganz normale ''.txt'' Dateien geöffnet werden.
+    \subsection{Implementation der Lösungsidee}
+      Um den Buchtext wie in \cref{sec:Loesungsidee:Vorbereiten} beschrieben vorzubereiten, wird zum einem die Python Funktion ''.replace'' genutzt. Außerdem wird auch, um die Leerzeichen zu ersetzen, das Modul ''re'' genutzt. Mit diesem Modul ist es mögliche Reguläre Ausdrücke auf dem Text zu verwenden. Um beliebige Leerzeichenfolgen zu ersetzen, wird der Ausdruck '' +'' genutzt.
+  %% ___ Beispiele ___ %%
+  \section{Beispiele\label{sec:Beispiele}}
+    \subsection{Vorgegebene Beispiele}
+      In diesem Abschnitt lässt sich die Ausgabe zu jedem vorgegebenen Beispiel finden.\\
+      Außerdem wird deutlich das der Algorithmus sehr schnell arbeitet, da kein vorgegebenes Beispiel eine längere reale Laufzeit als $\approx70 ms$ hat.
+      \subsubsection{Beispiel 0}
+        \lstinputlisting[caption=Ausgabe Beispiel 0]{../beispielausgaben/stoerung0.out}
+      \subsubsection{Beispiel 1}
+        \lstinputlisting[caption=Ausgabe Beispiel 1]{../beispielausgaben/stoerung1.out}
+      \subsubsection{Beispiel 2}
+        \lstinputlisting[caption=Ausgabe Beispiel 2]{../beispielausgaben/stoerung2.out}
+      \subsubsection{Beispiel 3}
+        \lstinputlisting[caption=Ausgabe Beispiel 3]{../beispielausgaben/stoerung3.out}
+      \subsubsection{Beispiel 4}
+        \lstinputlisting[caption=Ausgabe Beispiel 4]{../beispielausgaben/stoerung4.out}
+      \subsubsection{Beispiel 5}
+        \lstinputlisting[caption=Ausgabe Beispiel 5]{../beispielausgaben/stoerung5.out}
+      \subsubsection{Beispiel 6}
+        \lstinputlisting[caption=Ausgabe Beispiel 6]{../beispielausgaben/stoerung6.out}
+    \subsection{Eigene Beispiele} 
+      Hier befindet sich noch ein eigenes Beispiel durch das deutlich wird wie auch sehr viele passende Stellen schnell gefunden werden können.
+      \subsubsection{Beispiel 7}
+        \lstinputlisting[caption=Ausgabe Beispiel 7]{../beispielausgaben/stoerung7.out}
+  %% ___ Quellcode ___ %%
+  \section{Quellcode}
+    \lstinputlisting[language=Python]{../source/Aufgabe_1.py}
+\end{document}

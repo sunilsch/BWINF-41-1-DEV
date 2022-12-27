@@ -1,0 +1,144 @@
+\documentclass[a4paper,10pt,ngerman]{scrartcl}
+\usepackage{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8x]{inputenc}
+\usepackage[a4paper,margin=2.5cm,footskip=0.5cm]{geometry}
+\usepackage{float}
+\usepackage{subfigure}
+\usepackage{wrapfig}
+
+% Die nächsten drei Felder bitte anpassen:
+\newcommand{\Aufgabe}{Aufgabe 2: Verzinkt} % Aufgabennummer und Aufgabennamen angeben
+\newcommand{\TeilnahmeId}{66432}                  % Teilnahme-ID angeben
+\newcommand{\TeamId}{00662}                % Team-ID angeben
+\newcommand{\Name}{Linus Schumann}             % Name des Bearbeiter / der Bearbeiterin dieser Aufgabe angeben
+
+% Kopf- und Fußzeilen
+\usepackage{scrlayer-scrpage, lastpage}
+\setkomafont{pageheadfoot}{\large\textrm}
+\lohead{\Aufgabe}
+\rohead{Teilnahme-ID: \TeilnahmeId, L. Schumann}
+\cfoot*{\thepage{}/\pageref{LastPage}}
+
+% Position des Titels
+\usepackage{titling}
+\setlength{\droptitle}{-1.0cm}
+
+% Für mathematische Befehle und Symbole
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Für Bilder
+\usepackage{graphicx}
+
+% Für Algorithmen
+\usepackage{algpseudocode}
+
+% Für Quelltext
+\usepackage{listings}
+\usepackage{color}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+  keywordstyle=\color{blue},commentstyle=\color{mygreen},
+  stringstyle=\color{mymauve},rulecolor=\color{mygray},
+  basicstyle=\footnotesize\ttfamily,numberstyle=\tiny\color{mygray},
+  captionpos=b, % sets the caption-position to bottom
+  keepspaces=true, % keeps spaces in text
+  numbers=left, numbersep=5pt, showspaces=false,showstringspaces=true,
+  showtabs=false, stepnumber=2, tabsize=2,
+  breaklines=true,
+  frame=lines,
+  framesep=10pt,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+% Anklickbare Links im Dokument
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% Daten für die Titelseite
+\title{\textbf{\Huge\Aufgabe}}
+\author{\LARGE Teilnahme-ID: \LARGE \TeilnahmeId \\\\
+      \LARGE Team-ID: \LARGE \TeamId \\\\
+	    \LARGE Bearbeiter/-in dieser Aufgabe: \\ 
+	    \LARGE \Name\\\\}
+\date{\LARGE\today}
+
+%% ___ Anfang ___ %%
+\begin{document}
+  \maketitle
+  \tableofcontents
+  \vspace{8cm}
+  %% ___ Lösungsidee ___ %%
+  \section{Lösungsidee\label{sec:Loesungsidee}}
+    \subsection{Grundsätzliche Idee\label{sec:Loesungsidee:Idee}}
+      Wie in der Aufgabenstellung angegeben handelt es sich bei dieser Aufgabe um eine Simulation, daher wird die Lösungsidee auch so entwickelt.\\
+      Generell ist die Idee sehr einfach. Zuerst einmal müssen ein paar Keime definiert werden, von denen die Kristalle wachsen. Dann werden alle Keime einmal "wachsen" gelasssen. Dabei wird jeder Keim waagerecht und senkrecht, mit einer für diese Richtung vorher definierten Geschwindigkeit erweitert. \\
+      Bei jedem Schritt der auf diesem Weg dann zurückgelegt wird, wird dann einer neuer Keim mit den selben Einstellungen erstellt, der dann im nächsten Schritt auch "wachsen" gelasssen wird. Die Simulation endet dann, wenn das ganze Bild ausgefüllt ist und somit kein Keim mehr "wachsen" kann, da ein Keim nur auf freie Felder wachsen kann.
+    \subsection{Input Parameter\label{sec:Loesungsidee:Parameter}}
+      Als Input-Parameter muss die Anzahl an Keimen, die Breite und Höhe des Bildes und die maximale Geschwindigkeit definiert werden. Genaueres zur Umsetzung dieser Input-Datei lässt sich in \cref{sec:Umsetzung:Input} finden.
+    \subsection{Datenstruktur eines Keims}  
+      Wie in \cref{sec:Loesungsidee:Idee} beschrieben, müssen verschiedene Werte für jeden Keim gespeichert werden. Dazu gehören die x bzw. y Koordinaten des Keims, sowie die Geschwindigkeit für jede Richtung. Diese wird beim Erstellen der ersten Keime zufällig für jede Richtung definiert. Dabei gilt für eine Geschwindigkeit $1 \leq speed \leq maxSpeed$. Als letztes muss auch noch gespeichert werden, ob der Keim schon aktiviert ist. Dies liegt daran, dass um die Simulation realer zu machen, nicht alle Keime gleichzeitig das erste Mal anfangen zu wachsen, sondern zufällig nacheinander starten.
+    \subsection{Unterschiedliche Farben}
+      Um die unterschiedlichen Richtungen darzustellen werden diese 4 verschiedenen Grautöne genutzt:
+      \begin{enumerate}
+        \item rgb(75,75,75)
+        \item rgb(90,90,90)
+        \item rgb(105,105,105)
+        \item rgb(120,120,120)
+      \end{enumerate}
+      Außerdem wird jeder unsprüngliche Startpunkt eines Keims mit der Farbe schwarz (rgb(0,0,0)) dargestellt.
+  %% ___ Umsetzung ___ %%
+  \section{Umsetzung}
+    \subsection{Allgemeines}
+      Im Folgenden wird die Umsetzung, der in \cref{sec:Loesungsidee} beschriebene Lösungsidee, näher erläutert. Grundsätzlich wurde diese Idee dabei in Python, genauer gesagt in der Datei ''Aufgabe\_2.py'' implementiert. Diese Datei befindet sich im Verzeichnis ''./source/''.\\\\
+      Um das implementierte Programm zu starten, kann das Batch-Script genutzt werden. Dieses befindet sich in ''./executables/''. Eine direkte Ausführung der Python-Datei ist auch möglich, allerdings nur wenn sie man sich im ''./source/'' Verzeichnis befindet.\\\\
+      Unter dem Verzeichnis ''./beispieleingaben/'' befinden sich alle in dieser Dokumentation aufgeführten Beispiele und unter dem Verzeichnis ''./beispielausgaben/'' befinden sich dementsprechend die gesicherten Ausgaben, die auch bei Ausführung des Scripts ausgegeben werden. Letztere werden auf Grund der Bild-Ausgabe als ''.png'' gepspeichert.
+    \subsection{Input Datei\label{sec:Umsetzung:Input}}
+      Die Input-Datei, deren Parameter in \cref{sec:Loesungsidee:Parameter} beschrieben wurden, muss wie folgt aufgebaut sein:
+      \lstinputlisting[caption=Eingabe Beispiel 1]{../beispieleingaben/beispiel1.txt}
+      Dies ist natürlich ein Beispiel, es können also natürlich auch andere Zahlen eingegeben werden. Dabei muss nur für alle Zahlen $1\leq Zahl$ gelten.
+    \subsection{Ablauf der Simulation}
+      Zuerst werden die Keime initalisiert und als Dictonary in einer Liste gespeichert. Außerdem werden die erste Postionen der Keime schon mal schwarz gefärbt. Dann kann die Varibale ''pixelCount'', die immer die aktuelle Anzahl bereits gefärbter Pixel beinhaltet, auf die anfängliche Anzahl an Keimen gesetzt werden.\\
+      Dann startet die eigentliche Simulation. Zuerst wird dabei eine While-Schleife definiert, die nur endet wenn alle Felder ausgefüllt sind, also $pixelCount \geq width*height$ gilt. Innerhalb dieser Schleife wird zuerst eine Liste definiert in der alle neuen Keime, die in dieser Iteration entstehen gespeichert werden. Dann wird die aktuelle Liste an Keimen durchgegangen und jeder Keim bearbeitet, wenn er schon aktiviert ist (\cref{sec:Umsetzung:Input:Keim}). Wenn der Keim noch nicht aktiviert wurde, wird er mit einer Chance von $1:((width*height)/20000)$ aktiviert.\\
+      Nachdem Durchgehen der Keime wird die alte Liste der Keime durch die neue Liste der Keime ersetzt. Dann startet die nächste Iteration.\\\\
+      Am Ende der While-Schleife wird das Bild gespeichert und die Simulation endet.
+    \subsection{Keim bearbeiten\label{sec:Umsetzung:Input:Keim}}
+      Beim Bearbeiten eines Keims, wird zuerst die Reihenfolge der Richtungen gemischt. Dann wird für jede Richtung jedes Feld bis zur maximalen Geschwindigkeit durchgegangen. Für jedes berechnete Feld muss dann geprüft werden, ob es innerhalb des Bildes liegt und ob es noch nicht belegt ist.\\
+      Wenn es frei ist wird es gefärbt und dann an dieser Stelle ein neuer Keim erstellt, der dann in die Liste für neue Keime hinzugefügt wird.
+  %% ___ Beispiele ___ %%
+  \section{Beispiele}
+    \subsection{Beispiel 1}
+      \lstinputlisting[caption=Eingabe Beispiel 1]{../beispieleingaben/beispiel1.txt}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{../beispielausgaben/beispiel1.png}
+        \caption{Ausgabe Beispiel 1}
+      \end{figure}
+    \subsection{Beispiel 2}
+      \lstinputlisting[caption=Eingabe Beispiel 2]{../beispieleingaben/beispiel2.txt}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{../beispielausgaben/beispiel2.png}
+        \caption{Ausgabe Beispiel 2}
+      \end{figure}
+    \subsection{Beispiel 3}
+      \lstinputlisting[caption=Eingabe Beispiel 3]{../beispieleingaben/beispiel3.txt}
+      \begin{figure}[H]
+        \centering
+        \includegraphics[width=10cm]{../beispielausgaben/beispiel3.png}
+        \caption{Ausgabe Beispiel 3}
+      \end{figure}
+  %% ___ Quellcode ___ %%
+  \section{Quellcode}
+    \lstinputlisting[language=Python]{../source/Aufgabe_2.py}
+\end{document}

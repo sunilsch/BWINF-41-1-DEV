@@ -1,0 +1,27 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {1}L\IeC {\"o}sungsidee}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Feststellung gegebener Konstanten}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Aufgabenteil 1}{2}{subsection.1.2}%
+\contentsline {subsubsection}{\numberline {1.2.1}Abschlie\IeC {\ss }en eines Auftrages}{2}{subsubsection.1.2.1}%
+\contentsline {subsubsection}{\numberline {1.2.2}Erste Methode}{3}{subsubsection.1.2.2}%
+\contentsline {subsubsection}{\numberline {1.2.3}Zweite Methode}{3}{subsubsection.1.2.3}%
+\contentsline {subsection}{\numberline {1.3}Aufgabenteil 2}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Aufgabenteil 3}{3}{subsection.1.4}%
+\contentsline {subsubsection}{\numberline {1.4.1}Bestimmung der Konstante n}{3}{subsubsection.1.4.1}%
+\contentsline {section}{\numberline {2}Umsetzung}{3}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Allgemeines}{3}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Implementation der allgemeinen Funktionen}{4}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Daten einlesen}{4}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Auftrag abschlie\IeC {\ss }en}{4}{subsubsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.3}Implementation der ersten Methode}{4}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Implementation der zweiten Methode}{4}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Implementation der eigenen Methode}{4}{subsection.2.5}%
+\contentsline {subsubsection}{\numberline {2.5.1}Auswertung der Konstante n}{4}{subsubsection.2.5.1}%
+\contentsline {section}{\numberline {3}Beispiele}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Beispiel 0}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Beispiel 1}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Beispiel 2}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Beispiel 3}{7}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Beispiel 4}{8}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Quellcode}{8}{section.4}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

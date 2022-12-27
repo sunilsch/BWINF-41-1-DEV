@@ -1,0 +1,24 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {section}{\numberline {1}L\IeC {\"o}sungsidee}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Feststellung des Problems}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Erste Idee}{2}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Optimierung dieser Idee}{2}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Finden der k\IeC {\"u}rzesten Pfade}{2}{subsection.1.4}%
+\contentsline {section}{\numberline {2}Umsetzung}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Allgemeines}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Implementation der L\IeC {\"o}sungsidee}{3}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Einlesen des Graphen}{3}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}F\IeC {\"u}r jede Distanz Pfade finden}{3}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Gleiche und k\IeC {\"u}rzeste Pfade finden}{3}{subsubsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.3}Visualisierung}{3}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Beispiele}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Vorgegebene Beispiele}{4}{subsection.3.1}%
+\contentsline {subsubsection}{\numberline {3.1.1}Beispiel 0}{4}{subsubsection.3.1.1}%
+\contentsline {subsubsection}{\numberline {3.1.2}Beispiel 1}{5}{subsubsection.3.1.2}%
+\contentsline {subsubsection}{\numberline {3.1.3}Beispiel 2}{5}{subsubsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {3.1.4}Beispiel 3}{6}{subsubsection.3.1.4}%
+\contentsline {subsubsection}{\numberline {3.1.5}Beispiel 4}{6}{subsubsection.3.1.5}%
+\contentsline {subsection}{\numberline {3.2}Eigene Beispiele}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Beispiel 5}{7}{subsubsection.3.2.1}%
+\contentsline {section}{\numberline {4}Quellcode}{7}{section.4}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
